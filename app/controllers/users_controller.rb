@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     user_params = params.require(:user).permit(:name, :nickname, :email, :password)
 
     if (user = User.create(user_params))
-      session[:user_id] = user.id
+      log_in_as(user)
 
       redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
     else
