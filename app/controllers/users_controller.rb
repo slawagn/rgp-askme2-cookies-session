@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def new
-    session[:current_time] = Time.now
     @user = User.new
   end
   
@@ -12,7 +11,9 @@ class UsersController < ApplicationController
 
       redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
     else
-      redirect_to new_user_path, notice: 'Что-то пошло не так!' 
+      flash.now[:alert] = 'Что-то пошло не так!' 
+      
+      render :new
     end
   end
 end
