@@ -5,8 +5,10 @@ class UsersController < ApplicationController
   
   def create
     user_params = params.require(:user).permit(:name, :nickname, :email, :password)
-
-    if (user = User.create(user_params))
+    
+    user = User.create(user_params)
+    
+    if (user.save)
       log_in_as(user)
 
       redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
