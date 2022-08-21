@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     
     user = User.new(user_params)
     
-    if (user.save)
+    if user.save
       log_in_as(user)
 
       redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
